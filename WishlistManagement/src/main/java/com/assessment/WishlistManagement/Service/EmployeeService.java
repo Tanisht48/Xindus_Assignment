@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.util.Objects;
 import java.util.UUID;
 @Service
 public class EmployeeService implements IEmployeeUserService{
@@ -34,7 +35,7 @@ public class EmployeeService implements IEmployeeUserService{
 
     @Override
     public void removeSessionMessage() {
-        HttpSession httpSession = ((ServletRequestAttributes)(RequestContextHolder.getRequestAttributes())).getRequest().getSession();
+        HttpSession httpSession = ((ServletRequestAttributes)(Objects.requireNonNull(RequestContextHolder.getRequestAttributes()))).getRequest().getSession();
         httpSession.removeAttribute("msg");
     }
 

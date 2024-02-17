@@ -14,7 +14,7 @@ import java.util.Date;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private String id;
     private String name;
     @Column(unique = true)
     private String email;
@@ -24,7 +24,7 @@ public class Employee {
     private String verificationCode;
     private Boolean isAccountNonLocked;
     private Integer failedAttempt;
-    private Date lockTime;
+
 
 
     public Employee(String name,String email)
