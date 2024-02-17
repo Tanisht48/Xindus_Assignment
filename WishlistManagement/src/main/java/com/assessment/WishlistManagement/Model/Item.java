@@ -17,10 +17,19 @@ public class Item {
     private Long itemId;
     @NotEmpty
     private String itemName;
-
+    @NotEmpty
+    private Double itemPrice;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JoinColumn(name = "fk_employee_id")
     private Employee employee;
+
+
+    public Item(String itemName,Double itemPrice,Employee employee)
+    {
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.employee = employee;
+    }
 
 }
