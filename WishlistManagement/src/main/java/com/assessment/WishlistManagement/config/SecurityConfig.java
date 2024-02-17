@@ -52,7 +52,9 @@ public class SecurityConfig{
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+                .defaultSuccessUrl("/swagger-ui/index.html");
+
 
         return httpSecurity.build();
 
