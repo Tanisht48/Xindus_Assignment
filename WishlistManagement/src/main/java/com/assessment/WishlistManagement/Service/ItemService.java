@@ -1,8 +1,10 @@
 package com.assessment.WishlistManagement.Service;
 
+import com.assessment.WishlistManagement.CustomException.ItemNotFoundException;
 import com.assessment.WishlistManagement.Model.Employee;
 import com.assessment.WishlistManagement.Model.Item;
 import com.assessment.WishlistManagement.Model.dto.ItemDTO;
+import com.assessment.WishlistManagement.Model.dto.ResponseItemDto;
 import com.assessment.WishlistManagement.Repository.IItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,15 +20,15 @@ public class ItemService {
     private  EmployeeService employeeService;
     @Autowired
     private IItemRepository iItemRepository;
-    public List<ItemDTO> getWishlistItems(String username) {
+    public List<ResponseItemDto> getWishlistItems(String username) {
 
         Employee employee = employeeService.findByEmail(username);
         Optional<List<Item>> itemList = iItemRepository.findByEmployee_Id(employee.getId());
-        List<ItemDTO> responseItemList = new ArrayList<>();
+        List<ResponseItemDto> responseItemList = new ArrayList<>();
         if(itemList.isPresent())
         {
             for(Item i : itemList.get())
-                responseItemList.add(new ItemDTO(i.getItemName(), i.getItemPrice()));
+                responseItemList.add(new ResponseItemDto(i.getItemId(),i.getItemName(), i.getItemPrice()));
         }
         return responseItemList;
     }
@@ -40,6 +42,20 @@ public class ItemService {
         }
         else {
           return  Optional.empty();
+        }
+    }
+
+    public void deleteItem(Long id) {
+
+        Optional<Item> item = iItemRepository.findByItemId(id);
+
+        if(item.isPresent())
+        {
+            iItemRepository.delete(item.get());
+        }
+        else
+        {
+            throw new ItemNotFoundException("Item not Found");
         }
     }
 }

@@ -3,6 +3,7 @@ package com.assessment.WishlistManagement.Controller;
 import com.assessment.WishlistManagement.Model.Employee;
 import com.assessment.WishlistManagement.Model.Item;
 import com.assessment.WishlistManagement.Model.dto.ItemDTO;
+import com.assessment.WishlistManagement.Model.dto.ResponseItemDto;
 import com.assessment.WishlistManagement.Service.ItemService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
     @GetMapping("/wishlist")
-    public ResponseEntity<List<ItemDTO>> getALLItems()
+    public ResponseEntity<List<ResponseItemDto>> getALLItems()
     {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
@@ -36,7 +37,7 @@ public class ItemController {
         }
 
         // Use the username to fetch the user's wishlist items from the service
-        List<ItemDTO> items = itemService.getWishlistItems(username);
+        List<ResponseItemDto> items = itemService.getWishlistItems(username);
 
         return ResponseEntity.ok(items);
     }
@@ -57,10 +58,22 @@ public class ItemController {
             if (item.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong..");
             } else {
-                return ResponseEntity.ok("Registered Successfully");
+                return ResponseEntity.ok(" Item Added Successfully");
             }
         } catch (DataIntegrityViolationException ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User already exists");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Item already exists");
         }
+    }
+
+    @DeleteMapping("/wishlist/{id}")
+    public ResponseEntity<String> deleteItem(@PathVariable Long id)
+    {
+      try{
+        itemService.deleteItem(id);
+        return  new ResponseEntity<>("Item deleted successfully", HttpStatus.OK);
+      }
+      catch (Exception e) {
+          return new ResponseEntity<>("Error occurred while deleting item", HttpStatus.INTERNAL_SERVER_ERROR);
+      }
     }
 }
