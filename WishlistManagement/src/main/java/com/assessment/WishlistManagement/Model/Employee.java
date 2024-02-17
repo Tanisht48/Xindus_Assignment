@@ -16,7 +16,6 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String mobile;
     @Column(unique = true)
     private String email;
     private Boolean enable;
@@ -27,5 +26,11 @@ public class Employee {
     private Integer failedAttempt;
     private Date lockTime;
 
+
+    public Employee(String name,String email)
+    {
+        this.name = name;
+        this.email = email;
+    }
 
 }
