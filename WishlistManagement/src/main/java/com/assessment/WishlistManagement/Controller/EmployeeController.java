@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/home")
 @Validated
-public class HomeController {
+public class EmployeeController {
    @Autowired
     private EmployeeService employeeService;
 //
