@@ -1,11 +1,12 @@
 package com.assessment.WishlistManagement.Service;
 
 import com.assessment.WishlistManagement.Model.Employee;
+import com.assessment.WishlistManagement.Model.dto.EmployeeDto;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public interface IEmployeeUserService {
 
-    public Employee addEmployee(Employee employee, String url);
+    public Employee addEmployee(EmployeeDto employeeDto);
 
     public void removeSessionMessage();
 

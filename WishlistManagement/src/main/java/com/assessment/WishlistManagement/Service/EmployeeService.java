@@ -1,16 +1,18 @@
 package com.assessment.WishlistManagement.Service;
 
 import com.assessment.WishlistManagement.Model.Employee;
+import com.assessment.WishlistManagement.Model.dto.EmployeeDto;
 import com.assessment.WishlistManagement.Repository.IEmployeeRepository;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.UUID;
-
+@Service
 public class EmployeeService implements IEmployeeUserService{
 
     @Autowired
@@ -19,11 +21,12 @@ public class EmployeeService implements IEmployeeUserService{
 
 
     @Override
-    public Employee addEmployee(Employee employee, String url) {
-        String encryptPassword = bCryptPasswordEncoder().encode(employee.getPassword());
+    public Employee addEmployee(EmployeeDto employeeDto) {
+        String encryptPassword = bCryptPasswordEncoder().encode(employeeDto.getPassword());
+        Employee employee = new Employee(employeeDto.getName(),employeeDto.getEmail());
         employee.setPassword((encryptPassword));
         employee.setRole("ROLE_USER");
-        employee.setEnable(false);
+        employee.setEnable(true);
         employee.setVerificationCode(UUID.randomUUID().toString());
         employee.setIsAccountNonLocked(true);
         return iEmployeeRepository.save(employee);
