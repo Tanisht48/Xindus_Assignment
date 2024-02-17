@@ -1,6 +1,7 @@
 package com.assessment.WishlistManagement.Model.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ItemDTO {
 
     @NotEmpty
-    private String Name;
-    @NotEmpty
-    private Double Price;
+    private String name;
+    @NotNull
+    private Double price;
 }

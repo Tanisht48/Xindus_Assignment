@@ -21,7 +21,7 @@ public class ItemService {
     public List<ItemDTO> getWishlistItems(String username) {
 
         Employee employee = employeeService.findByEmail(username);
-        Optional<List<Item>> itemList = iItemRepository.findByFkEmployeeId(employee.getId());
+        Optional<List<Item>> itemList = iItemRepository.findByEmployee_Id(employee.getId());
         List<ItemDTO> responseItemList = new ArrayList<>();
         if(itemList.isPresent())
         {

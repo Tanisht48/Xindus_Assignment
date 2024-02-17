@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface IItemRepository extends JpaRepository<Item,Long> {
 
-    Optional<List<Item>> findByFkEmployeeId(Long id);
+    Optional<List<Item>> findByEmployee_Id(String id);
 }

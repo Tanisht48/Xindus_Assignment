@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@Validated
 @RequestMapping("/api")
+@Validated
 public class ItemController {
 
     @Autowired

@@ -35,14 +35,18 @@ public class SecurityConfig{
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthenticationProvider;
     }
+
+    /*
+    **** SecurityFilterChain ***
+       This method configures the security filter chain. The SecurityFilterChain is responsible
+       for defining how incoming HTTP requests should be handled by Spring Security filters.
+    */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/home/admin/**")
-                .hasRole("ADMIN")
-                .requestMatchers("/home/normal/**")
-                .hasRole("NORMAL")
+                .requestMatchers("/api/**")
+                .hasRole("USER")
                 .requestMatchers("/home/register")
                 .permitAll()
                 .anyRequest()

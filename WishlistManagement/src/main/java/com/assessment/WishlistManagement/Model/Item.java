@@ -3,6 +3,7 @@ package com.assessment.WishlistManagement.Model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ public class Item {
     private Long itemId;
     @NotEmpty
     private String itemName;
-    @NotEmpty
+    @NotNull
     private Double itemPrice;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
