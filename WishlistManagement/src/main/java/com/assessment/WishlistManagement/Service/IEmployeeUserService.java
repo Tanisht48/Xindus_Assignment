@@ -8,7 +8,6 @@ public interface IEmployeeUserService {
 
     public Employee addEmployee(EmployeeDto employeeDto);
 
-    public void removeSessionMessage();
 
     public BCryptPasswordEncoder bCryptPasswordEncoder();
 

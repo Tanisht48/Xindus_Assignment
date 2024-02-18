@@ -23,21 +23,32 @@ public class EmployeeService implements IEmployeeUserService{
 
     @Override
     public Employee addEmployee(EmployeeDto employeeDto) {
+        if (employeeDto == null || employeeDto.getName() == null || employeeDto.getEmail() == null || employeeDto.getPassword() == null) {
+            throw new IllegalArgumentException("EmployeeDto and its properties cannot be null");
+        }
+
         String encryptPassword = bCryptPasswordEncoder().encode(employeeDto.getPassword());
-        Employee employee = new Employee(employeeDto.getName(),employeeDto.getEmail());
-        employee.setPassword((encryptPassword));
+        if (encryptPassword == null) {
+            throw new RuntimeException("Failed to encrypt password");
+        }
+
+        Employee employee = new Employee(employeeDto.getName(), employeeDto.getEmail());
+        employee.setPassword(encryptPassword);
         employee.setRole("ROLE_USER");
         employee.setEnable(true);
         employee.setVerificationCode(UUID.randomUUID().toString());
         employee.setIsAccountNonLocked(true);
-        return iEmployeeRepository.save(employee);
+
+        try {
+           iEmployeeRepository.save(employee);
+
+            return employee;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to save employee", e);
+        }
     }
 
-    @Override
-    public void removeSessionMessage() {
-        HttpSession httpSession = ((ServletRequestAttributes)(Objects.requireNonNull(RequestContextHolder.getRequestAttributes()))).getRequest().getSession();
-        httpSession.removeAttribute("msg");
-    }
+
 
     @Override
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
