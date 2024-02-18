@@ -189,6 +189,5 @@ Contributions are welcome! Please feel free to submit pull requests or open issu
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
 
-This format should ensure proper alignment and readability in your README.md file. Let me know if you need further assistance!
+
