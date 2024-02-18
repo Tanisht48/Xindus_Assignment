@@ -25,6 +25,8 @@ public class ItemController {
 
     @Autowired
     private ItemService itemService;
+
+    //Get ALL the Items
     @GetMapping("/wishlist")
     public ResponseEntity<List<ResponseItemDto>> getALLItems()
     {
@@ -41,7 +43,7 @@ public class ItemController {
 
         return ResponseEntity.ok(items);
     }
-
+// Add am Item
     @PostMapping("/wishlist")
     public ResponseEntity<String> addAnItem(@Valid @RequestBody ItemDTO itemDTO)
     {
@@ -64,7 +66,7 @@ public class ItemController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Item already exists");
         }
     }
-
+ //Delete an Item
     @DeleteMapping("/wishlist/{id}")
     public ResponseEntity<String> deleteItem(@PathVariable Long id)
     {
