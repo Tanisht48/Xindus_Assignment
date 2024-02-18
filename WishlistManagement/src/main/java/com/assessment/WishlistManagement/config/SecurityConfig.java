@@ -14,17 +14,20 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig{
+
+    // Bean for password encoder
     @Bean
      public PasswordEncoder passwordEncoder(){
          return new BCryptPasswordEncoder();
      }
 
-
+    // Bean for custom user details service
     @Bean
     public UserDetailsService userDetailsService(){
         return new CustomUserDetailsService();
     }
 
+    // Bean for authentication provider
     @Bean
     public DaoAuthenticationProvider authenticationProvider(){
 
