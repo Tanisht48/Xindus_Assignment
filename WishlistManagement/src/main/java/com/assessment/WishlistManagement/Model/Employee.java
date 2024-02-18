@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+/**
+ * Entity class representing an employee.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,6 +29,12 @@ public class Employee {
     private Integer failedAttempt;
 
 
+    /**
+     * Constructor with parameters.
+     *
+     * @param name  the name of the employee
+     * @param email the email of the employee
+     */
 
     public Employee(String name,String email)
     {

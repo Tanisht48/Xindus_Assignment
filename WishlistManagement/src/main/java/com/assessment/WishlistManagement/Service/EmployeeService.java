@@ -13,6 +13,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.Objects;
 import java.util.UUID;
+
+/**
+ * Service class for managing employee users.
+ */
 @Service
 public class EmployeeService implements IEmployeeUserService{
 
@@ -20,6 +24,12 @@ public class EmployeeService implements IEmployeeUserService{
     private IEmployeeRepository iEmployeeRepository;
 
 
+    /**
+     * Adds a new employee user.
+     *
+     * @param employeeDto the DTO object representing the employee details
+     * @return the added Employee object
+     */
 
     @Override
     public Employee addEmployee(EmployeeDto employeeDto) {
@@ -49,17 +59,33 @@ public class EmployeeService implements IEmployeeUserService{
     }
 
 
-
+    /**
+     * Retrieves the BCryptPasswordEncoder instance.
+     *
+     * @return the BCryptPasswordEncoder instance
+     */
     @Override
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Finds an employee user by email.
+     *
+     * @param email the email of the employee user to find
+     * @return the found Employee object, or null if not found
+     */
     @Override
     public Employee findByEmail(String email) {
         return iEmployeeRepository.findByEmail(email);
     }
 
+    /**
+     * Finds an employee user by verification code and enables the account if found.
+     *
+     * @param code the verification code to search for
+     * @return true if a matching user is found and account is enabled, false otherwise
+     */
     @Override
     @Transactional
     public boolean findByVerificationCode(String code) {
