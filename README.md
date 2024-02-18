@@ -145,6 +145,11 @@ Additionally, the project includes Swagger support for API documentation. Swagge
    mvn spring-boot:run
    ```
 
+## Database Schema
+
+![Database Schema](images/DatabaseSchema.drawio.png)
+
+
 ## Database Setup
 
 To set up the database for the WishlistManagement application, follow these steps:
