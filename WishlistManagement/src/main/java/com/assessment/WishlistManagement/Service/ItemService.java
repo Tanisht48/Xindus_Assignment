@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * ItemService class provides service methods for managing wishlist items.
+ */
 @Service
 public class ItemService {
 
@@ -20,6 +22,13 @@ public class ItemService {
     private  EmployeeService employeeService;
     @Autowired
     private IItemRepository iItemRepository;
+
+    /**
+     * Retrieves all wishlist items for the given user.
+     *
+     * @param username the username (email) of the user
+     * @return a list of ResponseItemDto objects representing wishlist items
+     */
     public List<ResponseItemDto> getWishlistItems(String username) {
 
         Employee employee = employeeService.findByEmail(username);
@@ -32,7 +41,13 @@ public class ItemService {
         }
         return responseItemList;
     }
-
+    /**
+     * Adds a new item to the user's wishlist.
+     *
+     * @param username the username (email) of the user
+     * @param itemDTO  the DTO object representing the item to be added
+     * @return an Optional containing the added Item object if successful, or Optional.empty() otherwise
+     */
     public Optional<Item> addItem(String username,ItemDTO itemDTO) {
         Employee employee = employeeService.findByEmail(username);
 
@@ -45,6 +60,12 @@ public class ItemService {
         }
     }
 
+    /**
+     * Deletes an item from the user's wishlist based on its ID.
+     *
+     * @param id the ID of the item to be deleted
+     * @throws ItemNotFoundException if the item with the specified ID is not found
+     */
     public void deleteItem(Long id) {
 
         Optional<Item> item = iItemRepository.findByItemId(id);

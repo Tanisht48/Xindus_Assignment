@@ -5,7 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ * DTO class representing employee data transferred between client and server.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

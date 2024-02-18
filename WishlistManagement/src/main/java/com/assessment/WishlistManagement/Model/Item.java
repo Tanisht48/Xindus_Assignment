@@ -7,7 +7,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ * Entity class representing an item in the wishlist.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,7 +27,13 @@ public class Item {
     @JoinColumn(name = "fk_employee_id")
     private Employee employee;
 
-
+    /**
+     * Constructor with parameters.
+     *
+     * @param itemName  the name of the item
+     * @param itemPrice the price of the item
+     * @param employee  the employee associated with the item
+     */
     public Item(String itemName,Double itemPrice,Employee employee)
     {
         this.itemName = itemName;
