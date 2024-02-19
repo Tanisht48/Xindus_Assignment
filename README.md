@@ -21,6 +21,7 @@ Wishlist Management is a Spring Boot project tailored for employees to efficient
 
 
 <hr>
+
 ## Dependencies
 
 - [Spring Boot Starter Data JPA](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa): Provides support for Spring Data JPA, enabling easy interaction with databases using JPA.
